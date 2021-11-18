@@ -1,0 +1,100 @@
+// import { FC } from 'react';
+import Filters from "../components/Filters";
+import { State } from "../context/filter_context";
+import { tours } from "../tours";
+
+export enum ActionKind {
+  UPDATE_FILTERS = "UPDATE_FILTERS",
+  APPLY_FILTERS = "APPLY_FILTERS",
+  LOAD_TOURS = "LOAD_TOURS",
+}
+
+type Action = {
+  type: ActionKind;
+  payload: any;
+};
+
+const filter_reducer = (state: State, action: Action): State => {
+  const { type, payload } = action;
+
+  console.log("STATE", state.filters);
+
+  switch (type) {
+    // Initial Load
+    case ActionKind.LOAD_TOURS:
+      let highestPrice = action.payload.map((place: any) => {
+        return place.price;
+      });
+      highestPrice = Math.max(...highestPrice);
+      return {
+        ...state,
+        all_tours: [ ...payload ],
+        filtered_tours: [ ...payload ],
+        filters: { ...state.filters, price: highestPrice, max_price: highestPrice },
+      };
+
+    // Update Filter Values
+    case ActionKind.UPDATE_FILTERS:
+      const { filterName, filterValue } = payload;
+      console.log(
+        "filterValue:",
+        filterValue,
+        "state.filters.rating:",
+        state.filters.rating
+      );
+      return { ...state, filters: { ...state.filters, [filterName]: filterValue } };
+
+    // Apply Filtration
+    case ActionKind.APPLY_FILTERS:
+      const { all_tours } = state;
+      let temp_tours: any[] = all_tours;
+      const {
+        price,
+        groupSize,
+        city,
+        rating,
+        guidedTour,
+        entranceIncludedOnly,
+      } = state.filters;
+
+      // Group Size Filter
+      if (groupSize !== "all") {
+        temp_tours = temp_tours.filter((tour) => {
+          return tour.group_size === groupSize;
+        });
+      }
+      // City Filter
+      if (city !== "all") {
+        console.log("CITIES");
+        temp_tours = temp_tours.filter((tour) => {
+          return tour.city === city;
+        });
+      }
+      // Tour Price Filter
+      temp_tours = temp_tours.filter((tour) => {
+        return tour.price <= price;
+      });
+      // Tour Rating Filter
+      temp_tours = temp_tours.filter((tour) => {
+        return tour.rating >= rating;
+      });
+      // Guided Tours Only Filter
+      if (guidedTour) {
+        temp_tours = temp_tours.filter((tour) => {
+          return tour.guided_tour === true;
+        });
+      }
+      if (entranceIncludedOnly) {
+        temp_tours = temp_tours.filter((tour) => {
+          return tour.entrance_fees_included === true;
+        });
+      }
+
+      console.log("FILTRATION", { ...state, filtered_tours: temp_tours });
+      return { ...state, filtered_tours: temp_tours };
+  }
+
+  // throw new Error(`No Matching "${action.type}" - action type`);
+};
+
+export default filter_reducer;

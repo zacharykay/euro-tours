@@ -1,0 +1,128 @@
+@import '_config';
+
+.filters-section {
+  min-width: 10rem;
+  width: 10vw;
+}
+
+.form-control {
+  margin: 1rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  label {
+    font-weight: 500;
+  }
+  select {
+    text-transform: capitalize;
+  }
+
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: .4rem;
+    button {
+      font-size: 1rem;
+      background: #fff;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+    }
+    :hover,
+    :focus {
+      text-decoration: underline;
+      //   background-color: darken($off-white, 10%);
+      //   border-radius: 1rem;
+    }
+  }
+
+  .range-container {
+    input {
+      color: $dark-grey;
+    }
+    datalist {
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      width: 140px;
+    }
+  }
+
+  .checkbox-container {
+    display: flex;
+    //   margin-top: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    // font-size: 90%;
+    // column-gap: 0.4rem;
+  }
+}
+
+.underline {
+  width: 6rem;
+  height: 0.1rem;
+  background: #49a6e9;
+  background: rgb(204, 204, 204);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Rating Stars
+.rating-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.rate-area {
+  float: left;
+  border-style: none;
+  margin-top: 0.2rem;
+  position: absolute;
+  left: 0;
+}
+
+.rate-area:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.rate-area:not(:checked) > label {
+  float: right;
+  width: 1.2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 20px;
+  color: lightgrey;
+  margin-bottom: 10px !important;
+}
+
+.rate-area:not(:checked) > label:before {
+  content: '★';
+}
+
+.rate-area > input:checked ~ label {
+  color: #ffd700;
+  text-shadow: none;
+}
+
+.rate-area:not(:checked) > label:hover,
+.rate-area:not(:checked) > label:hover ~ label {
+  color: #ffd700;
+}
+
+.rate-area > input:checked + label:hover,
+.rate-area > input:checked + label:hover ~ label,
+.rate-area > input:checked ~ label:hover,
+.rate-area > input:checked ~ label:hover ~ label,
+.rate-area > label:hover ~ input:checked ~ label {
+  color: #fde55a;
+  text-shadow: none;
+}
+
+.rate-area > label:active {
+  position: relative;
+  top: 0px;
+  left: 0px;
+}

@@ -1,0 +1,45 @@
+@import 'config';
+
+.nearby-destinations {
+  @include set-background($dull-white);
+  height: 80vh;
+
+  p {
+    margin: 0.5rem;
+    color: set-text-color($dark-grey);
+  }
+
+  &-text {
+    font-size: 110%;
+    color: $dark-grey;
+
+    span {
+      padding: 0.5rem;
+    }
+  }
+}
+
+%text-box {
+  border: 1px solid #eee;
+  box-shadow: $shadow-black;
+  width: 700px;
+
+  &:hover {
+    transform: scale(.98);
+  }
+}
+
+.small-box {
+  @extend %text-box;
+  width: 400px;
+}
+
+.medium-box {
+  @extend %text-box;
+}
+
+.large-box {
+  @extend %text-box;
+  width: 1000px;
+  box-shadow: lighten($shadow-black, 10%);
+}

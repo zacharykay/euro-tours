@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Reference Files
+src/css/_config.scss
+src/components/Component.js
+src/components/Component.tsx
+src/components/Component.test.js
+src/components/Script.js
+src/components/Script.tsx
+/src/util/helpers.tsx
