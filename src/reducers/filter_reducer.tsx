@@ -7,11 +7,12 @@ export enum ActionKind {
   UPDATE_FILTERS = "UPDATE_FILTERS",
   APPLY_FILTERS = "APPLY_FILTERS",
   LOAD_TOURS = "LOAD_TOURS",
+  TOGGLE_FILTERS_MENU = "TOGGLE_FILTERS_MENU",
 }
 
 type Action = {
   type: ActionKind;
-  payload: any;
+  payload?: any;
 };
 
 const filter_reducer = (state: State, action: Action): State => {
@@ -43,6 +44,9 @@ const filter_reducer = (state: State, action: Action): State => {
         state.filters.rating
       );
       return { ...state, filters: { ...state.filters, [filterName]: filterValue } };
+
+    case ActionKind.TOGGLE_FILTERS_MENU:
+      return { ...state, showFilters: !state.showFilters };
 
     // Apply Filtration
     case ActionKind.APPLY_FILTERS:

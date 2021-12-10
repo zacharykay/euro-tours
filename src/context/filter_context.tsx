@@ -17,6 +17,7 @@ export type State = {
     guidedTour: boolean;
     entranceIncludedOnly: boolean;
   };
+  showFilters: boolean;
 };
 
 const initialStore: State = {
@@ -33,11 +34,13 @@ const initialStore: State = {
       guidedTour: false,
       entranceIncludedOnly: false,
     },
+  showFilters: true,
 };
 
 // type Reducer<State, Action> = (state: State, action: Action) => State;
 
 export const FilterContext = React.createContext<any>({} as any);
+// export const FilterContext = React.createContext<State>({} as any); Can't type like this because does not allow created functions, only allows interface on FilterContext object,
 // export const FilterContext = React.createContext({} as ReturnType<typeof FilterProvider>);
 // export const FilterContext = React.createContext<State | undefined>(undefined);
 
@@ -91,8 +94,14 @@ export const FilterProvider: FC = ({ children }) => {
     });
   };
 
+  const toggleFiltersMenu = () => {
+    dispatch({
+      type: ActionKind.TOGGLE_FILTERS_MENU,
+    });
+  };
+
   return (
-    <FilterContext.Provider value={{ ...state, updateFilters }}>
+    <FilterContext.Provider value={{ ...state, updateFilters, toggleFiltersMenu }}>
       {children}
     </FilterContext.Provider>
   );

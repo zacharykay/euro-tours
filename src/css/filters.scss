@@ -1,4 +1,4 @@
-@import '_config';
+// @import '_config';
 
 .filters-section {
   min-width: 10rem;
@@ -38,7 +38,7 @@
 
   .range-container {
     input {
-      color: $dark-grey;
+      color: darkgrey;
     }
     datalist {
       font-size: 12px;
