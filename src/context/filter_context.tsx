@@ -4,7 +4,10 @@ import { tours } from "../tours";
 
 import React, { FC, useEffect, useContext, useReducer } from "react";
 
+import axios from "axios";
+
 export type State = {
+  tours_data: any[];
   all_tours: any[];
   filtered_tours: any[];
   filters: {
@@ -21,6 +24,7 @@ export type State = {
 };
 
 const initialStore: State = {
+  tours_data: [],
   all_tours: [],
   filtered_tours: [],
   filters:
@@ -47,12 +51,28 @@ export const FilterContext = React.createContext<any>({} as any);
 export const FilterProvider: FC = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialStore);
 
+  const fetchData = async (url: string) => {
+    try {
+      const response = await axios.get(url);
+      const data = await response.data;
+      dispatch({ type: ActionKind.GET_DATA_SUCCESS, payload: data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Fetch Data
+  useEffect(() => {
+    fetchData("http://localhost:4000/api");
+  }, []);
+
   // Initial Load
   useEffect(
     () => {
-      dispatch({ type: ActionKind.LOAD_TOURS, payload: tours });
+      // console.log("TOUR DATA", state.tours_data);
+      dispatch({ type: ActionKind.LOAD_TOURS, payload: state.tours_data });
     },
-    [ tours ]
+    [ state.tours_data ]
   );
 
   // Apply Filtration
@@ -60,7 +80,7 @@ export const FilterProvider: FC = ({ children }) => {
     () => {
       dispatch({ type: ActionKind.APPLY_FILTERS, payload: null });
     },
-    [ tours, state.filters ]
+    [ state.filters ]
   );
 
   // Update Filter Values

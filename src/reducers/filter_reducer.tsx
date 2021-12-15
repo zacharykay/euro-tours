@@ -8,6 +8,7 @@ export enum ActionKind {
   APPLY_FILTERS = "APPLY_FILTERS",
   LOAD_TOURS = "LOAD_TOURS",
   TOGGLE_FILTERS_MENU = "TOGGLE_FILTERS_MENU",
+  GET_DATA_SUCCESS = "GET_DATA_SUCCESS",
 }
 
 type Action = {
@@ -21,6 +22,10 @@ const filter_reducer = (state: State, action: Action): State => {
   console.log("STATE", state.filters);
 
   switch (type) {
+    // Set Data to Fetched Data from API
+    case ActionKind.GET_DATA_SUCCESS:
+      return { ...state, tours_data: [ ...payload ] };
+
     // Initial Load
     case ActionKind.LOAD_TOURS:
       let highestPrice = action.payload.map((place: any) => {

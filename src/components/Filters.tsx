@@ -116,7 +116,7 @@ const Filters: FC<Props> = () => {
         {/* Rating Filter */}
         <div className="form-control">
           <div className="rating-container">
-            <label htmlFor="1-star">Rating</label>
+            <label htmlFor="1-star">Min. Rating</label>
             <div className="rate-area">
               <input
                 type="radio"
