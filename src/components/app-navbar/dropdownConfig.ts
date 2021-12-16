@@ -7,7 +7,8 @@ export const GoForward = 'GoForward';
 export const GoBack = 'GoBack';
 export const User = 'User';
 export const Language = 'Language';
-export const Puzzle = 'Puzzle'
+export const Puzzle = 'Puzzle';
+export const Key = "Key"
 
 interface DropdownItems {
   text?: string;
@@ -50,7 +51,7 @@ export const dropdownMenu: DropdownSection[] = [
           linkIcon: Language,
           secondaryIcon: GoForward,
           setActiveMenu: true,
-        },
+        }
       ],
   },
   {
@@ -63,6 +64,12 @@ export const dropdownMenu: DropdownSection[] = [
           text: "Go Back",
           linkIcon: GoBack,
           menuLink: primaryMenuName,
+        },
+
+        {
+          text: "Admin Panel",
+          linkIcon: Key,
+          pageLink: '/admin'
         },
 
         {

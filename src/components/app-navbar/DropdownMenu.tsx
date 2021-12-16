@@ -14,7 +14,16 @@ import { ReactComponent as GoBackIcon } from "../../icons/go-back.svg";
 import { ReactComponent as UserIcon } from "../../icons/user.svg";
 import { ReactComponent as LanguageIcon } from "../../icons/translate.svg";
 import { ReactComponent as PuzzleIcon } from "../../icons/puzzle.svg";
-import { Settings, GoForward, GoBack, User, Language, Puzzle } from "./dropdownConfig";
+import { ReactComponent as KeyIcon } from "../../icons/key.svg";
+import {
+  Settings,
+  GoForward,
+  GoBack,
+  User,
+  Language,
+  Puzzle,
+  Key,
+} from "./dropdownConfig";
 
 import DropdownItem from "./DropdownItem";
 import { dropdownMenu as DropdownConfig } from "./dropdownConfig";
@@ -48,6 +57,8 @@ const DropdownMenu = () => {
       <LanguageIcon />
     ) : comp === Puzzle ? (
       <PuzzleIcon />
+    ) : comp === Key ? (
+      <KeyIcon />
     ) : null;
   };
 
@@ -79,7 +90,7 @@ const DropdownMenu = () => {
                     rightIcon={assignComponent(secondaryComponentIcon)}
                     goToMenu={item.menuLink}
                   >
-                    {item.text}
+                    <a href={item.pageLink}>{item.text}</a>
                   </DropdownItem>
                 );
               })}

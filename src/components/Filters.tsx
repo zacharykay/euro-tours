@@ -8,7 +8,7 @@ import "../css/filters.scss";
 interface Props {}
 
 const Filters: FC<Props> = () => {
-  const { filters, updateFilters } = useFilterContext();
+  const { filters, updateFilters, stickyHeader } = useFilterContext();
 
   interface CityInterface {
     city: string;
@@ -49,7 +49,7 @@ const Filters: FC<Props> = () => {
   ];
 
   return (
-    <section className="filters-section">
+    <section className="filters-section" >
       <form onSubmit={(e) => e.preventDefault()}>
         {/* Price Filter */}
         <div className="form-control">

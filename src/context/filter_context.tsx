@@ -21,6 +21,7 @@ export type State = {
     entranceIncludedOnly: boolean;
   };
   showFilters: boolean;
+  stickyHeader: boolean;
 };
 
 const initialStore: State = {
@@ -39,6 +40,7 @@ const initialStore: State = {
       entranceIncludedOnly: false,
     },
   showFilters: true,
+  stickyHeader: true,
 };
 
 // type Reducer<State, Action> = (state: State, action: Action) => State;

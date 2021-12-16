@@ -1,12 +1,15 @@
-import Navbar from './Navbar';
+import Navbar from "./Navbar";
+import { useFilterContext } from "../context/filter_context";
 
 const Hero = () => {
-	return (
-		<div className='hero-container'>
-			<h2>EuroTours</h2>
-			{/* <Navbar /> */}
-		</div>
-	);
+  const { stickyHeader } = useFilterContext();
+
+  return (
+    <div className="hero-container" style={stickyHeader && { paddingTop: "5rem" }}>
+      <h2>EuroTours</h2>
+      {/* <Navbar /> */}
+    </div>
+  );
 };
 
 export default Hero;

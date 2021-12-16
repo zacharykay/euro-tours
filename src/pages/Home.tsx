@@ -11,10 +11,9 @@ const Home = () => {
   // console.log('Tours', filtered_tours);
 
   return (
-	//   <Fragment>
+    //   <Fragment>
     <main className="main-container">
-	
-      <div
+      {/* <div
         className={
           showFilters ? (
             "filters-hidden filters-wrapper"
@@ -24,10 +23,10 @@ const Home = () => {
         }
       >
         <Filters />
-      </div>
+      </div> */}
       {/* {showFilters && } */}
-	  <Hero/>
-	  {/* <div className='card-container-wrapper'> */}
+      <Hero />
+      {/* <div className='card-container-wrapper'> */}
       <div
         className={
           showFilters ? (
@@ -41,10 +40,10 @@ const Home = () => {
         {filtered_tours.map((tour: any) => {
           return <TourCard key={tour.id} {...tour} />;
         })}
-      {/* </div> */}
-	  </div>
+        {/* </div> */}
+      </div>
     </main>
-	// </Fragment>
+    // </Fragment>
   );
 };
 
