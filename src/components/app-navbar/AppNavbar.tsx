@@ -13,7 +13,7 @@ const AppNavbar: FC = (props) => {
   return (
     <nav className="navbar">
       <ul className="navbar-nav">
-        <NavItem icon={<Home />} />
+        <NavItem icon={<Home />} linkUrl={"/"} />
         <NavItem icon={<Cart />} />
         <NavItem icon={<Filters />} filterIcon />
         <NavItem icon={<Dots />}>

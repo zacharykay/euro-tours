@@ -57,6 +57,7 @@ export const FilterProvider: FC = ({ children }) => {
     try {
       const response = await axios.get(url);
       const data = await response.data;
+      console.log("DATATATATa", response);
       dispatch({ type: ActionKind.GET_DATA_SUCCESS, payload: data });
     } catch (err) {
       console.log(err);
@@ -71,8 +72,9 @@ export const FilterProvider: FC = ({ children }) => {
   // Initial Load
   useEffect(
     () => {
-      // console.log("TOUR DATA", state.tours_data);
-      dispatch({ type: ActionKind.LOAD_TOURS, payload: state.tours_data });
+      if (state.tours_data.length > 0) {
+        dispatch({ type: ActionKind.LOAD_TOURS, payload: state.tours_data });
+      }
     },
     [ state.tours_data ]
   );

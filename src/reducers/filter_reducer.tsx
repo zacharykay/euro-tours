@@ -24,14 +24,18 @@ const filter_reducer = (state: State, action: Action): State => {
   switch (type) {
     // Set Data to Fetched Data from API
     case ActionKind.GET_DATA_SUCCESS:
+      console.log("PAYLOAD", payload);
       return { ...state, tours_data: [ ...payload ] };
 
     // Initial Load
     case ActionKind.LOAD_TOURS:
+      // console.log("PAY", payload[0]);
       let highestPrice = action.payload.map((place: any) => {
         return place.price;
       });
+      console.log("HighestPrice 1", highestPrice);
       highestPrice = Math.max(...highestPrice);
+      console.log("HighestPrice 2", highestPrice);
       return {
         ...state,
         all_tours: [ ...payload ],

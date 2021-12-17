@@ -5,10 +5,11 @@ import "./navbar.scss";
 
 interface Props {
   icon?: string | number | ReactElement;
+  linkUrl?: string;
   filterIcon?: boolean;
 }
 
-const NavItem: FC<Props> = ({ icon, children, filterIcon }) => {
+const NavItem: FC<Props> = ({ icon, children, filterIcon, linkUrl }) => {
   const [ open, setOpen ] = useState(false);
 
   const { toggleFiltersMenu } = useFilterContext();
@@ -16,7 +17,7 @@ const NavItem: FC<Props> = ({ icon, children, filterIcon }) => {
   return (
     <li className="nav-item">
       <a
-        href="#"
+        href={linkUrl ? linkUrl : "#"}
         className="icon-button"
         onClick={() => {
           if (filterIcon) {

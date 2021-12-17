@@ -1,3 +1,7 @@
+import { useState } from "react";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+
 import "../css/admin_panel.scss";
 
 import { useFilterContext } from "../context/filter_context";
@@ -18,50 +22,126 @@ interface TourData {
   image_alt?: string;
 }
 
-const handleTourSubmit = (e: any) => {
-  e.preventDefault();
-};
+interface FormData {
+  "tour_title": string;
+  "tour_city": string;
+  "tour_country": string;
+  "tour_price": number;
+  "tour_length": number;
+  "tour_rating": string;
+  "tour_guided": string;
+  "tour_entrance_fees": string;
+  "tour_group_size": string;
+  "tour_description": string;
+  "tour_image_url": string;
+  "tour_image_alt": string | undefined;
+}
+
+const dataUrl: string = "http://localhost:4000/api";
 
 const AdminPanel = () => {
   const { filtered_tours, showFilters, stickyHeader } = useFilterContext();
+
+  const [ formData, setFormData ]: any = useState({
+    rating: "none",
+    guided_tour: false,
+    entrance_fees_included: false,
+    group_size: "none",
+    img_alt: "",
+  });
+
+  const handleFormData = (e: any) => {
+    if (e.target.name === "entrance_fees_included" || e.target.name === "guided_tour") {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.checked,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value.trim(),
+      });
+    }
+  };
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+    if (formData.rating !== "none" && formData.group_size !== "none") {
+      if (!formData.img_alt) {
+        formData.img_alt = formData.city + ", " + formData.country + " Tour Attraction";
+      }
+      formData.id = uuidv4();
+      formData.price = formData.price * 100;
+      formData.rating = parseFloat(formData.rating);
+      formData.hours = parseFloat(formData.hours);
+
+      axios.post(dataUrl, JSON.stringify(formData), {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("SUCCESS");
+      console.log("formDATA", formData);
+    } else {
+      console.log("FAILURE");
+    }
+  };
 
   return (
     <section className="admin-panel" style={stickyHeader && { paddingTop: "5rem" }}>
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="form-control">
-          <label htmlFor="tour-title">Tour Title</label>
+          <label htmlFor="name">Tour Title</label>
           <input
             type="text"
-            name="tour-title"
+            name="name"
             minLength={5}
             maxLength={100}
             placeholder="City Walking Tour"
+            onChange={handleFormData}
+            required
           />
-          <label htmlFor="tour-city">City</label>
+          <label htmlFor="city">City</label>
           <input
             type="text"
-            name="tour-city"
+            name="city"
             minLength={2}
             maxLength={32}
             placeholder="Dublin"
+            onChange={handleFormData}
+            required
           />
-          <label htmlFor="tour-country">Country</label>
+          <label htmlFor="country">Country</label>
           <input
             type="text"
-            name="tour-country"
+            name="country"
             minLength={3}
             maxLength={32}
             placeholder="Ireland"
+            onChange={handleFormData}
+            required
           />
-          <label htmlFor="tour-price">Tour Price</label>
-          <input type="number" name="tour-price" min="5" max="10000" placeholder="70" />
-          <label htmlFor="tour-length">Tour Length (Hours)</label>
-          <input type="number" name="tour-length" min="0.5" max="168" step="0.5" />
-          <label htmlFor="tour-rating">Tour Rating</label>
-          <select name="tour-rating" id="tour-rating">
-            <option value="none" selected>
-              Please Select...
-            </option>
+          <label htmlFor="price">Tour Price</label>
+          <input
+            type="number"
+            name="price"
+            min="5"
+            max="10000"
+            placeholder="70"
+            onChange={handleFormData}
+            required
+          />
+          <label htmlFor="hours">Tour Length (Hours)</label>
+          <input
+            type="number"
+            name="hours"
+            min="0.5"
+            max="168"
+            step="0.5"
+            onChange={handleFormData}
+            required
+          />
+          <label htmlFor="rating">Tour Rating</label>
+          <select name="rating" defaultValue="none" onChange={handleFormData} required>
+            <option value="none">Please Select...</option>
             <option value="1">1 Star</option>
             <option value="1.5">1.5 Stars</option>
             <option value="2">2 Stars</option>
@@ -74,44 +154,56 @@ const AdminPanel = () => {
           </select>
           <div className="checkbox-flexbox">
             <div>
-              <label htmlFor="tour-guided">Guided Tour ?</label>
-              <input type="checkbox" name="tour-guided" id="tour-guided" />
+              <label htmlFor="guided_tour">Guided Tour ?</label>
+              <input type="checkbox" name="guided_tour" onChange={handleFormData} />
             </div>
             <div>
-              <label htmlFor="tour-entrance-fees">Entrance Fees Included ?</label>
-              <input type="checkbox" name="tour-entrance-fees" id="tour-entrance-fees" />
+              <label htmlFor="entrance_fees_included">Entrance Fees Included ?</label>
+              <input
+                type="checkbox"
+                name="entrance_fees_included"
+                onChange={handleFormData}
+              />
             </div>
           </div>
-          <label htmlFor="tour-group-size">Group Size</label>
-          <select name="tour-group-size" id="tour-group-size">
-            <option value="none" selected>
-              Please Select...
-            </option>
+          <label htmlFor="group_size">Group Size</label>
+          <select
+            name="group_size"
+            defaultValue="none"
+            onChange={handleFormData}
+            required
+          >
+            <option value="none">Please Select...</option>
             <option value="small">Small</option>
             <option value="medium">Medium</option>
             <option value="large">Large</option>
           </select>
-          <label htmlFor="tour-description">Tour Description</label>
+          <label htmlFor="description">Tour Description</label>
           <textarea
-            name="tour-description"
-            id="tour-description"
+            name="description"
+            id="description"
             cols={40}
             rows={8}
             placeholder="Copper mug gastropub hoodie, banh mi 8-bit kombucha letterpress butcher DIY raw denim cornhole vaporware fam kale chips. VHS direct trade swag pug, 90's 8-bit pop-up hot chicken tacos before they sold out ennui leggings. Cray cronut gochujang, squid palo santo umami offal. Glossier humblebrag umami blue bottle vape small batch hella normcore disrupt celiac mumblecore. Vape meggings aesthetic lo-fi chambray hot chicken."
+            onChange={handleFormData}
+            required
           />
-          <label htmlFor="tour-image-url">Tour Image URL</label>
+          <label htmlFor="image_url">Tour Image URL</label>
           <input
             type="text"
-            name="tour-image-url"
+            name="image_url"
             placeholder="https://www.travelimager.com/images/ireland/Ireland-Dublin-Dublin-Castle.jpg"
+            onChange={handleFormData}
+            required
           />
-          <label htmlFor="tour-image-alt">Tour Image Alt Desc. (Optional)</label>
+          <label htmlFor="image_alt">Tour Image Alt Desc. (Optional)</label>
           <input
             type="text"
-            name="tour-image-alt"
+            name="image_alt"
             placeholder="Medieval stone exterior of the Dublin Castle, a major city attraction"
+            onChange={handleFormData}
           />
-          <input type="submit" onClick={(e) => handleTourSubmit(e)} />
+          <input type="submit" onClick={handleFormSubmit} />
         </div>
       </form>
     </section>
@@ -119,19 +211,3 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
-
-// id: 1,
-// name: "Cinque Terre Villages & The Italian Riviera",
-// city: "Florence",
-// country: "Italy",
-// price: 13900,
-// hours: 12,
-// rating: 4.5,
-// guided_tour: false,
-// group_size: "medium",
-// entrance_fees_included: true,
-// description:
-
-// image_url:
-
-// image_alt:
