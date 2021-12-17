@@ -1,7 +1,5 @@
-// import { FC } from 'react';
-import Filters from "../components/Filters";
 import { State } from "../context/filter_context";
-import { tours } from "../tours";
+import { defaultFormData } from "../context/filter_context";
 
 export enum ActionKind {
   UPDATE_FILTERS = "UPDATE_FILTERS",
@@ -9,6 +7,8 @@ export enum ActionKind {
   LOAD_TOURS = "LOAD_TOURS",
   TOGGLE_FILTERS_MENU = "TOGGLE_FILTERS_MENU",
   GET_DATA_SUCCESS = "GET_DATA_SUCCESS",
+  UPDATE_FORM = "UPDATE_FORM",
+  CLEAR_FORM = "CLEAR_FORM",
 }
 
 type Action = {
@@ -19,23 +19,28 @@ type Action = {
 const filter_reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
 
-  console.log("STATE", state.filters);
-
   switch (type) {
     // Set Data to Fetched Data from API
     case ActionKind.GET_DATA_SUCCESS:
-      console.log("PAYLOAD", payload);
       return { ...state, tours_data: [ ...payload ] };
+
+    // Update Form as Typing Occurs
+    case ActionKind.UPDATE_FORM:
+      const { formName, formValue } = payload;
+      return { ...state, form_data: { ...state.form_data, [formName]: formValue } };
+
+    // Clear Form on Submit
+    case ActionKind.CLEAR_FORM:
+      const { defaultFormData } = payload;
+      return { ...state, form_data: defaultFormData };
 
     // Initial Load
     case ActionKind.LOAD_TOURS:
-      // console.log("PAY", payload[0]);
       let highestPrice = action.payload.map((place: any) => {
         return place.price;
       });
-      console.log("HighestPrice 1", highestPrice);
+
       highestPrice = Math.max(...highestPrice);
-      console.log("HighestPrice 2", highestPrice);
       return {
         ...state,
         all_tours: [ ...payload ],
@@ -46,14 +51,9 @@ const filter_reducer = (state: State, action: Action): State => {
     // Update Filter Values
     case ActionKind.UPDATE_FILTERS:
       const { filterName, filterValue } = payload;
-      console.log(
-        "filterValue:",
-        filterValue,
-        "state.filters.rating:",
-        state.filters.rating
-      );
       return { ...state, filters: { ...state.filters, [filterName]: filterValue } };
 
+    // Toggle Filters Sidebar Menu
     case ActionKind.TOGGLE_FILTERS_MENU:
       return { ...state, showFilters: !state.showFilters };
 

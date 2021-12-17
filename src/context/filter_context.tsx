@@ -6,6 +6,21 @@ import React, { FC, useEffect, useContext, useReducer } from "react";
 
 import axios from "axios";
 
+interface FormData {
+  name: string | undefined;
+  city: string | undefined;
+  country: string | undefined;
+  price: number | undefined;
+  hours: number | undefined;
+  rating: string | undefined;
+  guided_tour: boolean | undefined;
+  group_size: string | undefined;
+  entrance_fees_included: boolean | undefined;
+  description: string | undefined;
+  image_url: string | undefined;
+  image_alt: string | undefined;
+}
+
 export type State = {
   tours_data: any[];
   all_tours: any[];
@@ -20,8 +35,24 @@ export type State = {
     guidedTour: boolean;
     entranceIncludedOnly: boolean;
   };
+  form_data: FormData;
   showFilters: boolean;
   stickyHeader: boolean;
+};
+
+export const defaultFormData: FormData = {
+  name: "",
+  city: "",
+  country: "",
+  price: 0,
+  hours: 0,
+  rating: "none",
+  guided_tour: false,
+  group_size: "none",
+  entrance_fees_included: false,
+  description: "",
+  image_url: "",
+  image_alt: "",
 };
 
 const initialStore: State = {
@@ -39,6 +70,7 @@ const initialStore: State = {
       guidedTour: false,
       entranceIncludedOnly: false,
     },
+  form_data: defaultFormData,
   showFilters: true,
   stickyHeader: true,
 };
@@ -57,7 +89,6 @@ export const FilterProvider: FC = ({ children }) => {
     try {
       const response = await axios.get(url);
       const data = await response.data;
-      console.log("DATATATATa", response);
       dispatch({ type: ActionKind.GET_DATA_SUCCESS, payload: data });
     } catch (err) {
       console.log(err);
@@ -87,6 +118,25 @@ export const FilterProvider: FC = ({ children }) => {
     [ state.filters ]
   );
 
+  const handleFormData = (e: any) => {
+    let formName = e.target.name;
+    let formValue = e.target.value;
+
+    if (typeof formValue === "number") {
+      formValue = Number(formValue);
+    }
+
+    if (formName === "guided_tour" || formName === "entrance_fees_included") {
+      formValue = e.target.checked;
+    }
+
+    dispatch({ type: ActionKind.UPDATE_FORM, payload: { formName, formValue } });
+  };
+
+  const clearFormData = () => {
+    dispatch({ type: ActionKind.CLEAR_FORM, payload: { defaultFormData } });
+  };
+
   // Update Filter Values
   const updateFilters = (e: any) => {
     let filterName = e.target.name;
@@ -94,7 +144,6 @@ export const FilterProvider: FC = ({ children }) => {
 
     if (filterName === "price") {
       filterValue = Number(filterValue);
-      console.log("PRICE_VAL", filterValue);
     }
     if (filterName === "groupSize") {
       filterValue = e.target.value;
@@ -125,7 +174,15 @@ export const FilterProvider: FC = ({ children }) => {
   };
 
   return (
-    <FilterContext.Provider value={{ ...state, updateFilters, toggleFiltersMenu }}>
+    <FilterContext.Provider
+      value={{
+        ...state,
+        updateFilters,
+        toggleFiltersMenu,
+        handleFormData,
+        clearFormData,
+      }}
+    >
       {children}
     </FilterContext.Provider>
   );
