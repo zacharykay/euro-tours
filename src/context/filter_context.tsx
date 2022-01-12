@@ -103,9 +103,12 @@ export const FilterProvider: FC = ({ children }) => {
   }
 
   // Fetch Data
-  useEffect(() => {
-    fetchData(apiDomain);
-  }, []);
+  useEffect(
+    () => {
+      fetchData(apiDomain);
+    },
+    [ apiDomain ]
+  );
 
   // Show Tours After Initial Load
   useEffect(
