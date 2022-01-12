@@ -6,7 +6,7 @@ import { useFilterContext } from "../context/filter_context";
 import { useUserContext } from "../context/user_context";
 import LoginLogout from "../components/LoginLogout";
 
-const dataUrl: string = "http://localhost:4000/api";
+const dataUrl: string | undefined = process.env.API_DOMAIN;
 
 const AdminPanel = () => {
   const { form_data, stickyHeader, handleFormData, clearFormData } = useFilterContext();
@@ -23,9 +23,13 @@ const AdminPanel = () => {
         form_data.rating = parseFloat(form_data.rating);
         form_data.hours = parseFloat(form_data.hours);
 
-        axios.post(dataUrl, JSON.stringify(form_data), {
-          headers: { "Content-Type": "application/json" },
-        });
+        if (dataUrl) {
+          axios.post(dataUrl, JSON.stringify(form_data), {
+            headers: { "Content-Type": "application/json" },
+          });
+        } else {
+          throw new Error("Data url was not defined");
+        }
 
         clearFormData();
       }
