@@ -16,7 +16,7 @@ interface Props {
   image_alt: string;
 }
 
-const ProductCard: FC<Props> = (tour) => {
+const TourCard: FC<Props> = (tour) => {
   const [ showInfo, setShowInfo ] = useState(false);
 
   const {
@@ -33,6 +33,8 @@ const ProductCard: FC<Props> = (tour) => {
     image_url,
     image_alt,
   } = tour;
+
+  const tour_aria_id: string = `${name.replace(" ", "_").toLowerCase()}_description`;
 
   return (
     <div className="card">
@@ -51,8 +53,12 @@ const ProductCard: FC<Props> = (tour) => {
       </h4>
 
       <img className="card-image" src={image_url} alt={image_alt} />
-      <p className={showInfo ? "info" : ""}>{description}</p>
+      <p className={showInfo ? "info" : ""} id={tour_aria_id}>
+        {description}
+      </p>
       <button
+        aria-controls={tour_aria_id}
+        aria-expanded={showInfo}
         onClick={() => {
           setShowInfo(!showInfo);
         }}
@@ -63,4 +69,4 @@ const ProductCard: FC<Props> = (tour) => {
   );
 };
 
-export default ProductCard;
+export default TourCard;

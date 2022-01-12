@@ -1,7 +1,40 @@
 .admin-panel {
+  h2 {
+    text-align: center;
+  }
+  p {
+    text-align: center;
+    margin-top: -1rem;
+  }
+  form {
+    margin: 0 auto;
+    width: 60vw;
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 800px) {
+  .admin-panel form {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-panel form {
+    width: 94vw;
+  }
 }
 
 .checkbox-flexbox {
   display: flex;
   justify-content: space-between;
+}
+
+#submit-btn {
+  margin: 1rem auto;
+  width: 150px;
+}
+
+#submit-btn:active {
+  transform: translate(1px, 1px);
 }

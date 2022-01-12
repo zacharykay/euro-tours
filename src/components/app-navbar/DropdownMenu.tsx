@@ -15,6 +15,9 @@ import { ReactComponent as UserIcon } from "../../icons/user.svg";
 import { ReactComponent as LanguageIcon } from "../../icons/translate.svg";
 import { ReactComponent as PuzzleIcon } from "../../icons/puzzle.svg";
 import { ReactComponent as KeyIcon } from "../../icons/key.svg";
+import { ReactComponent as CartIcon } from "../../icons/shopping-cart.svg";
+import { ReactComponent as MapIcon } from "../../icons/map.svg";
+import { ReactComponent as LocationPinIcon } from "../../icons/location-pin.svg";
 import {
   Settings,
   GoForward,
@@ -23,6 +26,9 @@ import {
   Language,
   Puzzle,
   Key,
+  Cart,
+  Map,
+  LocationPin,
 } from "./dropdownConfig";
 
 import DropdownItem from "./DropdownItem";
@@ -59,6 +65,12 @@ const DropdownMenu = () => {
       <PuzzleIcon />
     ) : comp === Key ? (
       <KeyIcon />
+    ) : comp === Cart ? (
+      <CartIcon />
+    ) : comp === Map ? (
+      <MapIcon />
+    ) : comp === LocationPin ? (
+      <LocationPinIcon />
     ) : null;
   };
 
@@ -89,8 +101,9 @@ const DropdownMenu = () => {
                     leftIcon={assignComponent(componentIcon)}
                     rightIcon={assignComponent(secondaryComponentIcon)}
                     goToMenu={item.menuLink}
+                    pageLink={item.pageLink}
                   >
-                    <a href={item.pageLink}>{item.text}</a>
+                    <span>{item.text}</span>
                   </DropdownItem>
                 );
               })}

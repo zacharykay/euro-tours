@@ -6,23 +6,26 @@ import Home from "./pages/Home";
 import MobileNav from "./components/app-navbar/AppNavbar";
 import AdminPanel from "./pages/AdminPanel";
 import Filters from "./components/Filters";
+import AuthWrapper from "./pages/AuthWrapper";
 
 import { useFilterContext } from "./context/filter_context";
 
 
 function App() {
-  const { filtered_tours, showFilters, stickyHeader } = useFilterContext();
+  const { filtered_tours, showFilters, stickyHeader, initializeFilters } = useFilterContext();
+
 
   return (
+    <AuthWrapper>
     <Router>
       <MobileNav />
       <div
         className={
-          showFilters ? (
+          showFilters && initializeFilters ? (
             "filters-hidden filters-wrapper"
-          ) : (
+          ) : !showFilters && initializeFilters ? (
             "filters-visible filters-wrapper"
-          )
+          ) : "filters-wrapper filters-initial-hidden"
         }
         style={stickyHeader && { paddingTop: "5rem" }}
       >
@@ -38,7 +41,8 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-    </Router>
+      </Router>
+      </AuthWrapper>
   );
 }
 

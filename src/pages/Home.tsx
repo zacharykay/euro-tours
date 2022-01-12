@@ -1,5 +1,5 @@
-import { useState, useEffect, Fragment } from "react";
-import Filters from "../components/Filters";
+// import { useState, useEffect, Fragment } from "react";
+// import Filters from "../components/Filters";
 import { useFilterContext } from "../context/filter_context";
 
 import TourCard from "../components/TourCard";
@@ -37,8 +37,8 @@ const Home = () => {
         }
         // style={showFilters ? { marginLeft: "10rem" } : { marginLeft: "0" }}
       >
-        {filtered_tours.map((tour: any) => {
-          return <TourCard key={tour.id} {...tour} />;
+        {filtered_tours.map((tour: any, index: number) => {
+          return <TourCard key={index} {...tour} />;
         })}
         {/* </div> */}
       </div>

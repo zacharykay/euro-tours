@@ -116,6 +116,7 @@ a {
 
   &:hover {
     background-color: $menu-item-hover;
+    cursor: pointer;
   }
 
   .icon-button {

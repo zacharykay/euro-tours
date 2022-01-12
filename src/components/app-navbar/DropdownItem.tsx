@@ -6,6 +6,7 @@ interface Props {
   leftIcon?: ReactElement | FC | string | number | null | undefined;
   rightIcon?: ReactElement | FC | string | number | null | undefined;
   goToMenu?: string;
+  pageLink?: string;
   setActiveMenu?: Dispatch<SetStateAction<string>>;
 }
 
@@ -14,7 +15,7 @@ const DropdownItem: FC<Props> = (props) => {
   return (
     <div>
       <a
-        href="#"
+        href={props.pageLink}
         className="menu-item"
         onClick={() => props.goToMenu && setActiveMenu && setActiveMenu(props.goToMenu)}
       >

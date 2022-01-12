@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import {Settings, GoForward, GoBack, User, Language, Puzzle,} from "../../icons/icons.jsx";
 
 // Declare Icons as Variables to avoid spelling errors
 export const Settings = 'Settings';
@@ -7,8 +6,11 @@ export const GoForward = 'GoForward';
 export const GoBack = 'GoBack';
 export const User = 'User';
 export const Language = 'Language';
+export const Map = 'Map';
 export const Puzzle = 'Puzzle';
-export const Key = "Key"
+export const Key = "Key";
+export const Cart = "Cart";
+export const LocationPin = "LocationPin"
 
 interface DropdownItems {
   text?: string;
@@ -26,7 +28,7 @@ interface DropdownSection {
 }
 
 const primaryMenuName: string = "main";
-const submenuNames: any[] = [ "settings", "languages" ];
+const submenuNames: any[] = [ "settings", "countries", "cart" ];
 
 export const dropdownMenu: DropdownSection[] = [
   {
@@ -34,10 +36,10 @@ export const dropdownMenu: DropdownSection[] = [
     primaryMenu: true,
     dropdownItems:
       [
-        {
-          text: "My Profile",
-          linkIcon: User,
-        },
+        // {
+        //   text: "My Profile (Coming Soon)",
+        //   linkIcon: User,
+        // },
         {
           text: "Settings",
           menuLink: submenuNames[0],
@@ -46,11 +48,16 @@ export const dropdownMenu: DropdownSection[] = [
           setActiveMenu: true,
         },
         {
-          text: "Languages",
+          text: "Current Countries",
           menuLink: submenuNames[1],
-          linkIcon: Language,
+          linkIcon: Map,
           secondaryIcon: GoForward,
           setActiveMenu: true,
+        },
+        {
+          text: "Cart (Coming Soon)",
+          linkIcon: Cart,
+          setActiveMenu: false
         }
       ],
   },
@@ -71,32 +78,6 @@ export const dropdownMenu: DropdownSection[] = [
           linkIcon: Key,
           pageLink: '/admin'
         },
-
-        {
-          text: "HTML",
-          linkIcon: Puzzle,
-          pageLink: "#",
-        },
-        {
-          text: "CSS",
-          linkIcon: Puzzle,
-          pageLink: "#",
-        },
-        {
-          text: "JavaScript",
-          linkIcon: Puzzle,
-          pageLink: "#",
-        },
-        {
-          text: "React",
-          linkIcon: Puzzle,
-          pageLink: "#",
-        },
-        {
-          text: "Next.js",
-          linkIcon: Puzzle,
-          pageLink: "#",
-        },
       ],
   },
   {
@@ -112,50 +93,35 @@ export const dropdownMenu: DropdownSection[] = [
         },
 
         {
-          text: "English",
-          linkIcon: Language,
+          text: "England",
+          linkIcon: LocationPin,
           pageLink: "#",
         },
         {
-          text: "Spanish",
-          linkIcon: Language,
+          text: "France",
+          linkIcon: LocationPin,
           pageLink: "#",
         },
         {
-          text: "French",
-          linkIcon: Language,
+          text: "Germany",
+          linkIcon: LocationPin,
           pageLink: "#",
         },
         {
-          text: "German",
-          linkIcon: Language,
+          text: "Italy",
+          linkIcon: LocationPin,
           pageLink: "#",
         },
         {
-          text: "Dutch",
-          linkIcon: Language,
+          text: "Netherlands",
+          linkIcon: LocationPin,
           pageLink: "#",
         },
         {
-          text: "Italian",
-          linkIcon: Language,
+          text: "Spain",
+          linkIcon: LocationPin,
           pageLink: "#",
-        },
-        {
-          text: "Russian",
-          linkIcon: Language,
-          pageLink: "#",
-        },
-        {
-          text: "Greek",
-          linkIcon: Language,
-          pageLink: "#",
-        },
-        {
-          text: "Arabic",
-          linkIcon: Language,
-          pageLink: "#",
-        },
+        }
       ],
   },
 ];

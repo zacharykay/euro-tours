@@ -38,6 +38,7 @@ export type State = {
   form_data: FormData;
   showFilters: boolean;
   stickyHeader: boolean;
+  initializeFilters: boolean;
 };
 
 export const defaultFormData: FormData = {
@@ -73,6 +74,7 @@ const initialStore: State = {
   form_data: defaultFormData,
   showFilters: true,
   stickyHeader: true,
+  initializeFilters: false
 };
 
 // type Reducer<State, Action> = (state: State, action: Action) => State;
@@ -100,7 +102,7 @@ export const FilterProvider: FC = ({ children }) => {
     fetchData("http://localhost:4000/api");
   }, []);
 
-  // Initial Load
+  // Show Tours After Initial Load
   useEffect(
     () => {
       if (state.tours_data.length > 0) {

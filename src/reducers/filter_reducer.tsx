@@ -55,7 +55,7 @@ const filter_reducer = (state: State, action: Action): State => {
 
     // Toggle Filters Sidebar Menu
     case ActionKind.TOGGLE_FILTERS_MENU:
-      return { ...state, showFilters: !state.showFilters };
+      return { ...state, showFilters: !state.showFilters, initializeFilters: true };
 
     // Apply Filtration
     case ActionKind.APPLY_FILTERS:
@@ -103,7 +103,7 @@ const filter_reducer = (state: State, action: Action): State => {
         });
       }
 
-      console.log("FILTRATION", { ...state, filtered_tours: temp_tours });
+      // console.log("FILTRATION", { ...state, filtered_tours: temp_tours });
       return { ...state, filtered_tours: temp_tours };
   }
 

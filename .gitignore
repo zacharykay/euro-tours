@@ -23,12 +23,18 @@ yarn-debug.log*
 yarn-error.log*
 
 # Reference Files
-src/css/_config.scss
-src/components/Component.js
-src/components/Component.tsx
-src/components/Component.test.js
-src/components/Script.js
-src/components/Script.tsx
+/src/css/_config.scss
+/src/components/Component.js
+/src/components/Component.tsx
+/src/components/Component.test.js
+/src/components/Script.js
+/src/components/Script.tsx
+/src/components/LoginButton.tsx
+/src/App.scss
 /src/util/helpers.tsx
 /src/reference
 /src/reference/testing/TransactionCreateStepTwo.tsx
+/src/reportWebVitals.js
+/src/components/app-navbar/DropdownMenuOld.tsx
+
+.env

@@ -1,16 +1,16 @@
-import { useState } from "react";
 import axios from "axios";
 
 import "../css/admin_panel.scss";
 
 import { useFilterContext } from "../context/filter_context";
+import { useUserContext } from "../context/user_context";
+import LoginLogout from "../components/LoginLogout";
 
 const dataUrl: string = "http://localhost:4000/api";
 
 const AdminPanel = () => {
   const { form_data, stickyHeader, handleFormData, clearFormData } = useFilterContext();
-
-  const [ selectError, setSelectError ] = useState(false);
+  const { myUser } = useUserContext();
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
@@ -36,6 +36,8 @@ const AdminPanel = () => {
 
   return (
     <section className="admin-panel" style={stickyHeader && { paddingTop: "5rem" }}>
+      <h2>Add a New Tour</h2>
+      {!myUser && <p>(Muse be logged into Create)</p>}
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="form-control">
           <label htmlFor="name">Tour Title</label>
@@ -171,9 +173,10 @@ const AdminPanel = () => {
             value={form_data.image_alt}
             onChange={handleFormData}
           />
-          <input type="submit" onClick={handleFormSubmit} />
+          {myUser && <input id="submit-btn" type="submit" onClick={handleFormSubmit} />}
         </div>
       </form>
+      {!myUser && <LoginLogout />}
     </section>
   );
 };
