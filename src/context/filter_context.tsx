@@ -98,8 +98,6 @@ export const FilterProvider: FC = ({ children }) => {
   let apiDomain: string | undefined;
   if (process.env.API_DOMAIN) {
     apiDomain = process.env.API_DOMAIN;
-  } else {
-    throw new Error("API Domain not defined");
   }
 
   // Fetch Data

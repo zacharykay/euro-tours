@@ -28,9 +28,9 @@ ReactDOM.render(
     domain={Auth0Domain}
     clientId={Auth0ClientId}
     redirectUri={window.location.origin}
-    // callbackUrl={window.location.origin}
-    // responseType="token id_token"
-    // cacheLocation="localstorage"
+    callbackUrl={window.location.origin}
+    responseType="token id_token"
+    cacheLocation="localstorage"
   >
     <UserProvider>
       <FilterProvider>
