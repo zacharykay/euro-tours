@@ -36,5 +36,6 @@ yarn-error.log*
 /src/reference/testing/TransactionCreateStepTwo.tsx
 /src/reportWebVitals.js
 /src/components/app-navbar/DropdownMenuOld.tsx
+/src/context/filter_context_old.jsx
 
 .env

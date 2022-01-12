@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useFilterContext } from "../context/filter_context";
-import { tours } from "../tours.js";
+// import { tours } from "../tours.js";
 // import { getUniqueValues } from '../utils/helpers';
 import Emoji from "./Emoji";
 import "../css/filters.scss";
@@ -8,7 +8,7 @@ import "../css/filters.scss";
 interface Props {}
 
 const Filters: FC<Props> = () => {
-  const { filters, updateFilters, stickyHeader } = useFilterContext();
+  const { filters, updateFilters } = useFilterContext();
 
   interface CityInterface {
     city: string;
@@ -49,7 +49,7 @@ const Filters: FC<Props> = () => {
   ];
 
   return (
-    <section className="filters-section" >
+    <section className="filters-section">
       <form onSubmit={(e) => e.preventDefault()}>
         {/* Price Filter */}
         <div className="form-control">

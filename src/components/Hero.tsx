@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import { useFilterContext } from "../context/filter_context";
 
 const Hero = () => {

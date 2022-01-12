@@ -26,7 +26,7 @@ ul {
 }
 
 a {
-  color: $text-color;
+  color: #{$text-color};
   text-decoration: none;
 }
 
@@ -34,15 +34,15 @@ a {
 
 // <nav>
 .navbar {
-  height: $nav-size;
-  padding: $nav-padding;
-  background-color: $background;
-  border-bottom: $border;
+  height: #{$nav-size};
+  padding: #{$nav-padding};
+  background-color: #{$background};
+  border-bottom: #{$border};
   position: fixed;
   width: 100vw;
   z-index: 1000;
   top: 0;
-  // margin-bottom: calc($nav-size * 2);
+  // margin-bottom: calc(#{$nav-size} * 2);
 }
 
 // <ul>
@@ -55,17 +55,17 @@ a {
 
 // <li>
 .nav-item {
-  width: calc($nav-size * 0.8);
+  width: calc(#{$nav-size} * 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .icon-button {
-  $button-size: calc($nav-size * 0.5);
-  color: $text-color;
-  width: $button-size;
-  height: $button-size;
+  $button-size: calc(#{$nav-size} * 0.5);
+  color: #{$text-color};
+  width: #{$button-size};
+  height: #{$button-size};
   background-color: #484a4d;
   border-radius: 50%;
   padding: 5px;
@@ -81,8 +81,8 @@ a {
 
   svg {
     // fill: $icon-color;
-    width: $icon-width;
-    height: $icon-height;
+    width: #{$icon-width};
+    height: #{$icon-height};
   }
 }
 
@@ -93,12 +93,12 @@ a {
   top: 58px;
   width: 300px;
   transform: (translateX(-45%));
-  background-color: $background;
-  border: $border;
-  border-radius: $border-radius;
+  background-color: #{$background};
+  border: #{$border};
+  border-radius: #{$border-radius};
   padding: 1rem;
   overflow: hidden;
-  transition: height $transition-speed ease;
+  transition: height #{$transition-speed} ease;
   z-index: 100;
 }
 
@@ -107,15 +107,15 @@ a {
 }
 
 .menu-item {
-  height: $menu-item-height;
+  height: #{$menu-item-height};
   display: flex;
   align-items: center;
-  border-radius: $border-radius;
-  transition: background $transition-speed;
+  border-radius: #{$border-radius};
+  transition: background #{$transition-speed};
   padding: 0.5rem;
 
   &:hover {
-    background-color: $menu-item-hover;
+    background-color: #{$menu-item-hover};
     cursor: pointer;
   }
 
@@ -138,14 +138,14 @@ a {
 }
 .menu-primary-enter-active {
   transform: translateX(0%);
-  transition: all $transition-speed ease;
+  transition: all #{$transition-speed} ease;
 }
 .menu-primary-exit {
   position: absolute;
 }
 .menu-primary-exit-active {
   transform: translateX(-110%);
-  transition: all $transition-speed ease;
+  transition: all #{$transition-speed} ease;
 }
 
 .menu-secondary-enter {
@@ -153,12 +153,12 @@ a {
 }
 .menu-secondary-enter-active {
   transform: translateX(0%);
-  transition: all $transition-speed ease;
+  transition: all #{$transition-speed} ease;
 }
 .menu-secondary-exit {
   // Must have class defined even if empty for proper operation
 }
 .menu-secondary-exit-active {
   transform: translateX(110%);
-  transition: all $transition-speed ease;
+  transition: all #{$transition-speed} ease;
 }

@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-// Declare Icons as Variables to avoid spelling errors
+// Declared Icons as Variables to avoid spelling errors
 export const Settings = 'Settings';
 export const GoForward = 'GoForward';
 export const GoBack = 'GoBack';

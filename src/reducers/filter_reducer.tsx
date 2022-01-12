@@ -1,5 +1,5 @@
 import { State } from "../context/filter_context";
-import { defaultFormData } from "../context/filter_context";
+// import { defaultFormData } from "../context/filter_context";
 
 export enum ActionKind {
   UPDATE_FILTERS = "UPDATE_FILTERS",
@@ -103,7 +103,6 @@ const filter_reducer = (state: State, action: Action): State => {
         });
       }
 
-      // console.log("FILTRATION", { ...state, filtered_tours: temp_tours });
       return { ...state, filtered_tours: temp_tours };
   }
 

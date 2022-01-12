@@ -4,8 +4,6 @@ $filters-animation-time: 0.6s;
 
 * {
   box-sizing: border-box;
-  // margin: 0;
-  // padding: 0;
 }
 
 body {
@@ -26,7 +24,7 @@ a {
 }
 hr {
   border: none;
-  border-top: 1px solid var(--clr-grey-8);
+  border-top: 1px solid grey;
 }
 
 h1,
@@ -34,14 +32,14 @@ h2,
 h3,
 h4,
 h5 {
-  letter-spacing: $spacing;
-  text-transform: capitalize;
+  letter-spacing: #{$spacing};
+  text-transform: #{capitalize};
 }
 
 .section-center {
   width: 90vw;
   margin: 0 auto;
-  max-width: var(--max-width);
+  max-width: #{$max-width};
 }
 
 .text-center {
@@ -70,10 +68,10 @@ h5 {
     z-index: 999;
   }
   &-visible {
-    animation: showFilters $filters-animation-time ease-in forwards;
+    animation: showFilters #{$filters-animation-time} ease-in forwards;
   }
   &-hidden {
-    animation: hideFilters $filters-animation-time ease-out forwards;
+    animation: hideFilters #{$filters-animation-time} ease-out forwards;
   }
   &-initial-hidden {
     transform: translateX(-100%);
@@ -104,19 +102,11 @@ h5 {
   justify-content: center;
   background: transparent;
   border-color: transparent;
-  font-size: var(--nav-font-size);
-  width: var(--auth-button-width);
   cursor: pointer;
   text-transform: uppercase;
-  color: var(--white);
-  height: var(--nav-height);
   svg {
     margin-left: 0.5rem;
   }
-}
-
-.auth-btn:hover {
-  background-color: var(--dark-grey);
 }
 
 @media screen and (min-width: 992px) {
@@ -136,12 +126,10 @@ h5 {
 }
 
 .main-container {
-  //   display: flex;
   position: relative;
 }
 
 .hero-container {
-  // padding-top: 5rem;
   h2 {
     font-size: 2rem;
     text-align: center;
@@ -149,17 +137,3 @@ h5 {
     padding-bottom: 2.6rem;
   }
 }
-
-// :root {
-//   --max-width: 1180px;
-//   --transition: all 0.3s linear;
-//   --spacing: 0.1rem;
-// }
-
-// *,
-// ::before,
-// ::after {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// }

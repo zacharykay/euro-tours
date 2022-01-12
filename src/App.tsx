@@ -10,39 +10,39 @@ import AuthWrapper from "./pages/AuthWrapper";
 
 import { useFilterContext } from "./context/filter_context";
 
-
 function App() {
-  const { filtered_tours, showFilters, stickyHeader, initializeFilters } = useFilterContext();
-
+  const { showFilters, stickyHeader, initializeFilters } = useFilterContext();
 
   return (
     <AuthWrapper>
-    <Router>
-      <MobileNav />
-      <div
-        className={
-          showFilters && initializeFilters ? (
-            "filters-hidden filters-wrapper"
-          ) : !showFilters && initializeFilters ? (
-            "filters-visible filters-wrapper"
-          ) : "filters-wrapper filters-initial-hidden"
-        }
-        style={stickyHeader && { paddingTop: "5rem" }}
-      >
-        <Filters />
-      </div>
-      {/* <Header /> */}
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/admin">
-          <AdminPanel />
-        </Route>
-      </Switch>
-      <Footer />
+      <Router>
+        <MobileNav />
+        <div
+          className={
+            showFilters && initializeFilters ? (
+              "filters-hidden filters-wrapper"
+            ) : !showFilters && initializeFilters ? (
+              "filters-visible filters-wrapper"
+            ) : (
+              "filters-wrapper filters-initial-hidden"
+            )
+          }
+          style={stickyHeader && { paddingTop: "5rem" }}
+        >
+          <Filters />
+        </div>
+        {/* <Header /> */}
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/admin">
+            <AdminPanel />
+          </Route>
+        </Switch>
+        <Footer />
       </Router>
-      </AuthWrapper>
+    </AuthWrapper>
   );
 }
 

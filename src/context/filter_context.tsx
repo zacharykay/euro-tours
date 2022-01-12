@@ -1,6 +1,5 @@
 import reducer from "../reducers/filter_reducer";
 import { ActionKind } from "../reducers/filter_reducer";
-import { tours } from "../tours";
 
 import React, { FC, useEffect, useContext, useReducer } from "react";
 
@@ -74,15 +73,10 @@ const initialStore: State = {
   form_data: defaultFormData,
   showFilters: true,
   stickyHeader: true,
-  initializeFilters: false
+  initializeFilters: false,
 };
 
-// type Reducer<State, Action> = (state: State, action: Action) => State;
-
 export const FilterContext = React.createContext<any>({} as any);
-// export const FilterContext = React.createContext<State>({} as any); Can't type like this because does not allow created functions, only allows interface on FilterContext object,
-// export const FilterContext = React.createContext({} as ReturnType<typeof FilterProvider>);
-// export const FilterContext = React.createContext<State | undefined>(undefined);
 
 export const FilterProvider: FC = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialStore);
@@ -193,22 +187,3 @@ export const FilterProvider: FC = ({ children }) => {
 export const useFilterContext = () => {
   return useContext(FilterContext);
 };
-
-// export const useFilterContext = () => {
-//     const context = useContext(FilterContext);
-//     if (context === undefined) {
-//         throw new Error("useFilterContext must be within FilterContextProvider")
-//     }
-
-// 	return context;
-// };
-
-// function filterReducer (state = initialStore, action: { type: string }) {
-// 	switch (action.type) {
-// 		case 'CHANGE PRICE':
-// 			return { price: 1 };
-// 	}
-
-// 	return state;
-// }
-// };
