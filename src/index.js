@@ -7,9 +7,9 @@ import { FilterProvider } from "./context/filter_context";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { UserProvider } from "./context/user_context";
 
-let Auth0Domain: string | undefined;
-let Auth0ClientId: string | undefined;
-const Auth0VariableErrorMsg = (envVariable: string): string =>
+let Auth0Domain;
+let Auth0ClientId;
+const Auth0VariableErrorMsg = (envVariable) =>
   `process.env variable for Auth0 ${envVariable} was not supplied to Auth0 Provider`;
 
 if (process.env.REACT_APP_AUTH_DOMAIN) {
