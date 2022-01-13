@@ -91,12 +91,12 @@ export const FilterProvider: FC = ({ children }) => {
     }
   };
 
-  const apiDomain: string = process.env.API_DOMAIN!;
+  const apiDomain: string | undefined = process.env.API_DOMAIN;
 
   // Fetch Data
   useEffect(
     () => {
-      fetchData(apiDomain);
+      fetchData(process.env.API_DOMAIN!);
     },
     [ apiDomain ]
   );
