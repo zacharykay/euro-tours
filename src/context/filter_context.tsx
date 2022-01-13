@@ -3,7 +3,7 @@ import { ActionKind } from "../reducers/filter_reducer";
 
 import React, { FC, useEffect, useContext, useReducer } from "react";
 
-// import axios from "axios";
+const domain: string = "https://euro-tours-api.herokuapp.com/api";
 
 interface FormData {
   name: string | undefined;
@@ -82,20 +82,6 @@ export const FilterProvider: FC = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialStore);
 
   const fetchData = async (url: string) => {
-    // let headers = new Headers();
-
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Accept', 'application/json');
-    // headers.append('Authorization', 'Basic');
-    // headers.append('Origin', 'http://localhost:3000');
-
-    // interface Error {
-    //   status?: number;
-    //   message?: string;
-    // }
-
-    
-
     try {
       const response = await fetch(url,  {method: 'GET', headers: {"Content-Type": "application/json",
       "Accept": "application/json", "Authorization": "Basic", "Origin": "http://localhost:3000",}, mode: 'cors'});
@@ -106,49 +92,9 @@ export const FilterProvider: FC = ({ children }) => {
         throw new Error(data.message);
       }
     } catch (err) {
-      let errr = new Error("Not working");
-      console.log(err, `URL of: '${url}' requested`, errr);
+      console.log(err)
     }
   }
-      
-    //   fetch(sign_in, {
-    //     mode: 'cors',
-    //     credentials: 'include',
-    //     method: 'POST',
-    //     headers: headers
-    // })
-
-
-      
-      // const response = await axios.get(url, {
-      //   method: "GET",
-      //   headers:
-      //     {
-      //       "Content-Type": "application/json",
-      //       "Accept": "application/json",
-      //       "Authorization": "Basic",
-      //       // "Origin": "*",
-      //     },
-      //     mode: cors
-      
-  
-
-  //   function performSignIn() {
-
-  //     fetch(sign_in, {
-  //         mode: 'cors',
-  //         credentials: 'include',
-  //         method: 'POST',
-  //         headers: headers
-  //     })
-  //     .then(response => response.json())
-  //     .then(json => console.log(json))
-  //     .catch(error => console.log('Authorization failed: ' + error.message));
-  // }
-
-  // const apiDomain: string | undefined = process.env.API_DOMAIN;
-  const domain: string = "https://euro-tours-api.herokuapp.com/api";
-  // const testDomain: string = 'http://localhost:4000/api'
 
   // Fetch Data
   useEffect(

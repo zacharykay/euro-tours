@@ -41,7 +41,7 @@ const AdminPanel = () => {
   return (
     <section className="admin-panel" style={stickyHeader && { paddingTop: "5rem" }}>
       <h2>Add a New Tour</h2>
-      {!myUser && <p>(Muse be logged into Create)</p>}
+      {!myUser && <p>(Muse be logged in to Create)</p>}
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="form-control">
           <label htmlFor="name">Tour Title</label>
