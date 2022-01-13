@@ -81,31 +81,22 @@ export const FilterContext = React.createContext<any>({} as any);
 export const FilterProvider: FC = ({ children }) => {
   const [ state, dispatch ] = useReducer(reducer, initialStore);
 
-  const fetchData = async (url: string | undefined) => {
+  const fetchData = async (url: string) => {
     try {
-      if (url) {
-        const response = await axios.get(url);
-        const data = await response.data;
-        dispatch({ type: ActionKind.GET_DATA_SUCCESS, payload: data });
-      } else {
-        throw new Error("url was not properly defined");
-      }
+      const response = await axios.get(url);
+      const data = await response.data;
+      dispatch({ type: ActionKind.GET_DATA_SUCCESS, payload: data });
     } catch (err) {
-      console.log(err);
+      console.log(err, `URL of: '${url}' was not properly defined`);
     }
   };
-
-  let apiDomain: string | undefined;
-  if (process.env.API_DOMAIN) {
-    apiDomain = process.env.API_DOMAIN;
-  }
 
   // Fetch Data
   useEffect(
     () => {
-      fetchData(apiDomain);
+      fetchData(process.env.API_DOMAIN!);
     },
-    [ apiDomain ]
+    [ process.env.API_DOMAIN! ]
   );
 
   // Show Tours After Initial Load
