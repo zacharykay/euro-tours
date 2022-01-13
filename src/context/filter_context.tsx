@@ -91,12 +91,14 @@ export const FilterProvider: FC = ({ children }) => {
     }
   };
 
+  const apiDomain: string = process.env.API_DOMAIN!;
+
   // Fetch Data
   useEffect(
     () => {
-      fetchData(process.env.API_DOMAIN!);
+      fetchData(apiDomain);
     },
-    [ process.env.API_DOMAIN! ]
+    [ apiDomain ]
   );
 
   // Show Tours After Initial Load
