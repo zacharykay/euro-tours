@@ -91,7 +91,7 @@ export const FilterProvider: FC = ({ children }) => {
     }
   };
 
-  const apiDomain: string | undefined = process.env.API_DOMAIN;
+  // const apiDomain: string | undefined = process.env.API_DOMAIN;
   const domain: string = "https://euro-tours-api.netlify.app/api";
 
   // Fetch Data
