@@ -83,7 +83,9 @@ export const FilterProvider: FC = ({ children }) => {
 
   const fetchData = async (url: string) => {
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(url, {
+        headers: { "Content-Type": "application/json" },
+      });
       const data = await response.data;
       dispatch({ type: ActionKind.GET_DATA_SUCCESS, payload: data });
     } catch (err) {
