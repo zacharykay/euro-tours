@@ -101,7 +101,7 @@ export const FilterProvider: FC = ({ children }) => {
     () => {
       fetchData(domain);
     },
-    [ domain ]
+    []
   );
 
   // Show Tours After Initial Load
