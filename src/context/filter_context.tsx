@@ -92,13 +92,14 @@ export const FilterProvider: FC = ({ children }) => {
   };
 
   const apiDomain: string | undefined = process.env.API_DOMAIN;
+  const domain: string = "https://euro-tours-api.netlify.app/api";
 
   // Fetch Data
   useEffect(
     () => {
-      fetchData(process.env.API_DOMAIN!);
+      fetchData(domain);
     },
-    [ apiDomain ]
+    [ domain ]
   );
 
   // Show Tours After Initial Load
