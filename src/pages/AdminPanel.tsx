@@ -48,6 +48,7 @@ const AdminPanel = () => {
           <input
             type="text"
             name="name"
+            id="name"
             minLength={5}
             maxLength={100}
             placeholder="City Walking Tour"
@@ -59,6 +60,7 @@ const AdminPanel = () => {
           <input
             type="text"
             name="city"
+            id="city"
             minLength={2}
             maxLength={32}
             placeholder="Dublin"
@@ -70,6 +72,7 @@ const AdminPanel = () => {
           <input
             type="text"
             name="country"
+            id="country"
             minLength={3}
             maxLength={32}
             placeholder="Ireland"
@@ -81,6 +84,7 @@ const AdminPanel = () => {
           <input
             type="number"
             name="price"
+            id="price"
             min="5"
             max="10000"
             placeholder="70"
@@ -92,6 +96,7 @@ const AdminPanel = () => {
           <input
             type="number"
             name="hours"
+            id="hours"
             min="0.5"
             max="168"
             step="0.5"
@@ -102,6 +107,7 @@ const AdminPanel = () => {
           <label htmlFor="rating">Tour Rating</label>
           <select
             name="rating"
+            id="rating"
             value={form_data.rating}
             onChange={handleFormData}
             required
@@ -123,6 +129,7 @@ const AdminPanel = () => {
               <input
                 type="checkbox"
                 name="guided_tour"
+                id="guided_tour"
                 checked={form_data.guided_tour}
                 onChange={handleFormData}
               />
@@ -132,6 +139,7 @@ const AdminPanel = () => {
               <input
                 type="checkbox"
                 name="entrance_fees_included"
+                id="entrance_fees_included"
                 checked={form_data.entrance_fees_included}
                 onChange={handleFormData}
               />
@@ -140,6 +148,7 @@ const AdminPanel = () => {
           <label htmlFor="group_size">Group Size</label>
           <select
             name="group_size"
+            id="group_size"
             value={form_data.group_size}
             onChange={handleFormData}
             required
@@ -164,6 +173,7 @@ const AdminPanel = () => {
           <input
             type="text"
             name="image_url"
+            id="image_url"
             placeholder="https://www.travelimager.com/images/ireland/Ireland-Dublin-Dublin-Castle.jpg"
             value={form_data.image_url}
             onChange={handleFormData}
@@ -173,6 +183,7 @@ const AdminPanel = () => {
           <input
             type="text"
             name="image_alt"
+            id="image_alt"
             placeholder="Medieval stone exterior of the Dublin Castle, a major city attraction"
             value={form_data.image_alt}
             onChange={handleFormData}
